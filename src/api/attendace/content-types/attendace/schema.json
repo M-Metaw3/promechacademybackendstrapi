@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "attendaces",
+  "info": {
+    "singularName": "attendace",
+    "pluralName": "attendaces",
+    "displayName": "Attendace",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "attended": {
+      "type": "boolean"
+    },
+    "lesson": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::lesson.lesson"
+    },
+    "user": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "attendaces"
+    }
+  }
+}

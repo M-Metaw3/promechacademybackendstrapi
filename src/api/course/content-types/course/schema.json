@@ -1,0 +1,74 @@
+{
+  "kind": "collectionType",
+  "collectionName": "courses",
+  "info": {
+    "singularName": "course",
+    "pluralName": "courses",
+    "displayName": "course",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "chapters": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::chapter.chapter",
+      "inversedBy": "courses"
+    },
+    "imgSrc": {
+      "type": "media",
+      "multiple": false,
+      "required": true,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "required": true
+    },
+    "user": {
+      "type": "string"
+    },
+    "userimage": {
+      "type": "media",
+      "multiple": true,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "categoryname": {
+      "type": "string",
+      "required": true,
+      "minLength": 10,
+      "maxLength": 100
+    },
+    "hours": {
+      "type": "integer",
+      "required": true,
+      "min": 1,
+      "default": 0
+    },
+    "description": {
+      "type": "text",
+      "required": true,
+      "minLength": 50
+    },
+    "track": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "api::track.track",
+      "inversedBy": "courses"
+    }
+  }
+}
