@@ -81,6 +81,13 @@
       "type": "boolean",
       "default": false,
       "required": true
+    },
+    "jobstatus": {
+      "type": "boolean",
+      "default": false
+    },
+    "bio": {
+      "type": "string"
     }
   }
 }

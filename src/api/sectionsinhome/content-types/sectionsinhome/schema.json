@@ -1,0 +1,37 @@
+{
+  "kind": "collectionType",
+  "collectionName": "sectionsinhomes",
+  "info": {
+    "singularName": "sectionsinhome",
+    "pluralName": "sectionsinhomes",
+    "displayName": "sectionsinhome",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "header": {
+      "type": "string",
+      "required": false
+    },
+    "subheader": {
+      "type": "string"
+    },
+    "descrption": {
+      "type": "text"
+    },
+    "imagesection": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    }
+  }
+}

@@ -38,7 +38,7 @@
     },
     "userimage": {
       "type": "media",
-      "multiple": true,
+      "multiple": false,
       "required": false,
       "allowedTypes": [
         "images",
@@ -69,6 +69,12 @@
       "relation": "manyToOne",
       "target": "api::track.track",
       "inversedBy": "courses"
+    },
+    "attendace": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::attendace.attendace",
+      "mappedBy": "course"
     }
   }
 }

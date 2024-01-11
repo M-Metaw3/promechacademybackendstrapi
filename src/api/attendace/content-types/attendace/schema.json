@@ -18,13 +18,30 @@
     "lesson": {
       "type": "relation",
       "relation": "oneToOne",
-      "target": "api::lesson.lesson"
+      "target": "api::lesson.lesson",
+      "inversedBy": "attendace"
     },
     "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "attendaces"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course",
+      "inversedBy": "attendace"
+    },
+    "chapter": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::chapter.chapter",
+      "inversedBy": "attendace"
+    },
+    "primarykey": {
+      "type": "string",
+      "unique": true
     }
   }
 }

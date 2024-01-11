@@ -761,6 +761,8 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'api::attendace.attendace'
     >;
     accept: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
+    jobstatus: Attribute.Boolean & Attribute.DefaultTo<false>;
+    bio: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -771,6 +773,39 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'plugin::users-permissions.user',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiAboutUsAboutUs extends Schema.CollectionType {
+  collectionName: 'about_uses';
+  info: {
+    singularName: 'about-us';
+    pluralName: 'about-uses';
+    displayName: 'AboutUs';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    question: Attribute.String;
+    answers: Attribute.Text;
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::about-us.about-us',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::about-us.about-us',
       'oneToOne',
       'admin::user'
     > &
@@ -801,6 +836,17 @@ export interface ApiAttendaceAttendace extends Schema.CollectionType {
       'manyToOne',
       'plugin::users-permissions.user'
     >;
+    course: Attribute.Relation<
+      'api::attendace.attendace',
+      'oneToOne',
+      'api::course.course'
+    >;
+    chapter: Attribute.Relation<
+      'api::attendace.attendace',
+      'oneToOne',
+      'api::chapter.chapter'
+    >;
+    primarykey: Attribute.String & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -875,10 +921,7 @@ export interface ApiBookingBooking extends Schema.CollectionType {
     isBooking: Attribute.Boolean &
       Attribute.Required &
       Attribute.DefaultTo<false>;
-    primarykey: Attribute.String &
-      Attribute.Required &
-      Attribute.Private &
-      Attribute.Unique;
+    primarykey: Attribute.String & Attribute.Required & Attribute.Unique;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -991,6 +1034,11 @@ export interface ApiChapterChapter extends Schema.CollectionType {
       'oneToMany',
       'api::lesson.lesson'
     >;
+    attendace: Attribute.Relation<
+      'api::chapter.chapter',
+      'oneToOne',
+      'api::attendace.attendace'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1090,6 +1138,11 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'manyToOne',
       'api::track.track'
     >;
+    attendace: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'api::attendace.attendace'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1101,6 +1154,38 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::course.course',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiHerosectionHerosection extends Schema.CollectionType {
+  collectionName: 'herosections';
+  info: {
+    singularName: 'herosection';
+    pluralName: 'herosections';
+    displayName: 'Herosection';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    header: Attribute.String;
+    paragraph: Attribute.String;
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::herosection.herosection',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::herosection.herosection',
       'oneToOne',
       'admin::user'
     > &
@@ -1126,6 +1211,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'manyToOne',
       'api::chapter.chapter'
     >;
+    attendace: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'api::attendace.attendace'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1137,6 +1227,109 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiSectionsinhomeSectionsinhome extends Schema.CollectionType {
+  collectionName: 'sectionsinhomes';
+  info: {
+    singularName: 'sectionsinhome';
+    pluralName: 'sectionsinhomes';
+    displayName: 'sectionsinhome';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    header: Attribute.String;
+    subheader: Attribute.String;
+    descrption: Attribute.Text;
+    imagesection: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::sectionsinhome.sectionsinhome',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::sectionsinhome.sectionsinhome',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTaskTask extends Schema.CollectionType {
+  collectionName: 'tasks';
+  info: {
+    singularName: 'task';
+    pluralName: 'tasks';
+    displayName: 'Task';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    details: Attribute.String;
+    chapter: Attribute.Relation<
+      'api::task.task',
+      'oneToOne',
+      'api::chapter.chapter'
+    >;
+    file: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::task.task', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiTaskanswerTaskanswer extends Schema.CollectionType {
+  collectionName: 'taskanswers';
+  info: {
+    singularName: 'taskanswer';
+    pluralName: 'taskanswers';
+    displayName: 'Taskanswer';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    task: Attribute.Relation<
+      'api::taskanswer.taskanswer',
+      'oneToOne',
+      'api::task.task'
+    >;
+    answerfile: Attribute.Media;
+    users_permissions_user: Attribute.Relation<
+      'api::taskanswer.taskanswer',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::taskanswer.taskanswer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::taskanswer.taskanswer',
       'oneToOne',
       'admin::user'
     > &
@@ -1224,6 +1417,7 @@ declare module '@strapi/types' {
       'plugin::users-permissions.permission': PluginUsersPermissionsPermission;
       'plugin::users-permissions.role': PluginUsersPermissionsRole;
       'plugin::users-permissions.user': PluginUsersPermissionsUser;
+      'api::about-us.about-us': ApiAboutUsAboutUs;
       'api::attendace.attendace': ApiAttendaceAttendace;
       'api::blog.blog': ApiBlogBlog;
       'api::booking.booking': ApiBookingBooking;
@@ -1232,7 +1426,11 @@ declare module '@strapi/types' {
       'api::chapter.chapter': ApiChapterChapter;
       'api::contact.contact': ApiContactContact;
       'api::course.course': ApiCourseCourse;
+      'api::herosection.herosection': ApiHerosectionHerosection;
       'api::lesson.lesson': ApiLessonLesson;
+      'api::sectionsinhome.sectionsinhome': ApiSectionsinhomeSectionsinhome;
+      'api::task.task': ApiTaskTask;
+      'api::taskanswer.taskanswer': ApiTaskanswerTaskanswer;
       'api::test.test': ApiTestTest;
       'api::track.track': ApiTrackTrack;
     }

@@ -20,6 +20,12 @@
       "relation": "manyToOne",
       "target": "api::chapter.chapter",
       "inversedBy": "lessons"
+    },
+    "attendace": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::attendace.attendace",
+      "mappedBy": "lesson"
     }
   }
 }
