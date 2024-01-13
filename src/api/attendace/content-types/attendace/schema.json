@@ -13,7 +13,8 @@
   "pluginOptions": {},
   "attributes": {
     "attended": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "lesson": {
       "type": "relation",

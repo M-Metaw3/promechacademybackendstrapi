@@ -825,7 +825,7 @@ export interface ApiAttendaceAttendace extends Schema.CollectionType {
     draftAndPublish: true;
   };
   attributes: {
-    attended: Attribute.Boolean;
+    attended: Attribute.Boolean & Attribute.DefaultTo<false>;
     lesson: Attribute.Relation<
       'api::attendace.attendace',
       'oneToOne',
@@ -1004,6 +1004,44 @@ export interface ApiCategoryBlogCategoryBlog extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::category-blog.category-blog',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCertificateCertificate extends Schema.CollectionType {
+  collectionName: 'certificates';
+  info: {
+    singularName: 'certificate';
+    pluralName: 'certificates';
+    displayName: 'Certificate';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    users_permissions_user: Attribute.Relation<
+      'api::certificate.certificate',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    details: Attribute.String;
+    pdf: Attribute.Media;
+    image: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::certificate.certificate',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::certificate.certificate',
       'oneToOne',
       'admin::user'
     > &
@@ -1423,6 +1461,7 @@ declare module '@strapi/types' {
       'api::booking.booking': ApiBookingBooking;
       'api::career.career': ApiCareerCareer;
       'api::category-blog.category-blog': ApiCategoryBlogCategoryBlog;
+      'api::certificate.certificate': ApiCertificateCertificate;
       'api::chapter.chapter': ApiChapterChapter;
       'api::contact.contact': ApiContactContact;
       'api::course.course': ApiCourseCourse;
