@@ -26,6 +26,12 @@
       "relation": "oneToOne",
       "target": "api::attendace.attendace",
       "mappedBy": "lesson"
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course",
+      "inversedBy": "lesson"
     }
   }
 }

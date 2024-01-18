@@ -4,7 +4,8 @@
   "info": {
     "singularName": "taskanswer",
     "pluralName": "taskanswers",
-    "displayName": "Taskanswer"
+    "displayName": "Taskanswer",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -17,19 +18,23 @@
       "target": "api::task.task"
     },
     "answerfile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
       "allowedTypes": [
         "images",
         "files",
         "videos",
         "audios"
-      ],
-      "type": "media",
-      "multiple": false
+      ]
     },
     "users_permissions_user": {
       "type": "relation",
       "relation": "oneToOne",
       "target": "plugin::users-permissions.user"
+    },
+    "finished": {
+      "type": "boolean"
     }
   }
 }

@@ -88,6 +88,40 @@
     },
     "bio": {
       "type": "string"
+    },
+    "survey_answer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::survey-answer.survey-answer",
+      "mappedBy": "users_permissions_user"
+    },
+    "resume": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "profile": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos",
+        "audios"
+      ]
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "website": {
+      "type": "string"
     }
   }
 }

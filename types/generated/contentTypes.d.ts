@@ -763,6 +763,15 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     accept: Attribute.Boolean & Attribute.Required & Attribute.DefaultTo<false>;
     jobstatus: Attribute.Boolean & Attribute.DefaultTo<false>;
     bio: Attribute.String;
+    survey_answer: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToOne',
+      'api::survey-answer.survey-answer'
+    >;
+    resume: Attribute.Media;
+    profile: Attribute.Media;
+    linkedin: Attribute.String;
+    website: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1181,6 +1190,16 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'oneToOne',
       'api::attendace.attendace'
     >;
+    lesson: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'api::lesson.lesson'
+    >;
+    survey_answer: Attribute.Relation<
+      'api::course.course',
+      'oneToOne',
+      'api::survey-answer.survey-answer'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1254,6 +1273,11 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       'oneToOne',
       'api::attendace.attendace'
     >;
+    course: Attribute.Relation<
+      'api::lesson.lesson',
+      'oneToOne',
+      'api::course.course'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1306,6 +1330,57 @@ export interface ApiSectionsinhomeSectionsinhome extends Schema.CollectionType {
   };
 }
 
+export interface ApiSurveyAnswerSurveyAnswer extends Schema.CollectionType {
+  collectionName: 'survey_answers';
+  info: {
+    singularName: 'survey-answer';
+    pluralName: 'survey-answers';
+    displayName: 'SurveyAnswer';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    question1: Attribute.String;
+    rating1: Attribute.String;
+    question2: Attribute.String;
+    rating2: Attribute.String;
+    question3: Attribute.String;
+    rating3: Attribute.String;
+    question4: Attribute.String;
+    rating4: Attribute.String;
+    question5: Attribute.String;
+    rating5: Attribute.String;
+    users_permissions_user: Attribute.Relation<
+      'api::survey-answer.survey-answer',
+      'oneToOne',
+      'plugin::users-permissions.user'
+    >;
+    unique: Attribute.String & Attribute.Unique;
+    course: Attribute.Relation<
+      'api::survey-answer.survey-answer',
+      'oneToOne',
+      'api::course.course'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::survey-answer.survey-answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::survey-answer.survey-answer',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
 export interface ApiTaskTask extends Schema.CollectionType {
   collectionName: 'tasks';
   info: {
@@ -1341,6 +1416,7 @@ export interface ApiTaskanswerTaskanswer extends Schema.CollectionType {
     singularName: 'taskanswer';
     pluralName: 'taskanswers';
     displayName: 'Taskanswer';
+    description: '';
   };
   options: {
     draftAndPublish: true;
@@ -1357,6 +1433,7 @@ export interface ApiTaskanswerTaskanswer extends Schema.CollectionType {
       'oneToOne',
       'plugin::users-permissions.user'
     >;
+    finished: Attribute.Boolean;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1468,6 +1545,7 @@ declare module '@strapi/types' {
       'api::herosection.herosection': ApiHerosectionHerosection;
       'api::lesson.lesson': ApiLessonLesson;
       'api::sectionsinhome.sectionsinhome': ApiSectionsinhomeSectionsinhome;
+      'api::survey-answer.survey-answer': ApiSurveyAnswerSurveyAnswer;
       'api::task.task': ApiTaskTask;
       'api::taskanswer.taskanswer': ApiTaskanswerTaskanswer;
       'api::test.test': ApiTestTest;

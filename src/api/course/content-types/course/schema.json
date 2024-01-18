@@ -75,6 +75,18 @@
       "relation": "oneToOne",
       "target": "api::attendace.attendace",
       "mappedBy": "course"
+    },
+    "lesson": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::lesson.lesson",
+      "mappedBy": "course"
+    },
+    "survey_answer": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::survey-answer.survey-answer",
+      "mappedBy": "course"
     }
   }
 }

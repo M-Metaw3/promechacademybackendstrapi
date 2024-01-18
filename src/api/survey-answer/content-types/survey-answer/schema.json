@@ -1,0 +1,62 @@
+{
+  "kind": "collectionType",
+  "collectionName": "survey_answers",
+  "info": {
+    "singularName": "survey-answer",
+    "pluralName": "survey-answers",
+    "displayName": "SurveyAnswer",
+    "description": ""
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "question1": {
+      "type": "string"
+    },
+    "rating1": {
+      "type": "string"
+    },
+    "question2": {
+      "type": "string"
+    },
+    "rating2": {
+      "type": "string"
+    },
+    "question3": {
+      "type": "string"
+    },
+    "rating3": {
+      "type": "string"
+    },
+    "question4": {
+      "type": "string"
+    },
+    "rating4": {
+      "type": "string"
+    },
+    "question5": {
+      "type": "string"
+    },
+    "rating5": {
+      "type": "string"
+    },
+    "users_permissions_user": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "survey_answer"
+    },
+    "unique": {
+      "type": "string",
+      "unique": true
+    },
+    "course": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::course.course",
+      "inversedBy": "survey_answer"
+    }
+  }
+}
