@@ -772,6 +772,9 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
     profile: Attribute.Media;
     linkedin: Attribute.String;
     website: Attribute.String;
+    GraduationDates: Attribute.Date & Attribute.Required;
+    gender: Attribute.Enumeration<['Male', 'Female']> & Attribute.Required;
+    fullusername: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -1200,6 +1203,7 @@ export interface ApiCourseCourse extends Schema.CollectionType {
       'oneToOne',
       'api::survey-answer.survey-answer'
     >;
+    courseyoutubelink: Attribute.Text;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
@@ -1289,6 +1293,65 @@ export interface ApiLessonLesson extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::lesson.lesson',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiLogoLogo extends Schema.CollectionType {
+  collectionName: 'logos';
+  info: {
+    singularName: 'logo';
+    pluralName: 'logos';
+    displayName: 'Logo';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    logo: Attribute.Media;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<'api::logo.logo', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<'api::logo.logo', 'oneToOne', 'admin::user'> &
+      Attribute.Private;
+  };
+}
+
+export interface ApiOutistructorOutistructor extends Schema.CollectionType {
+  collectionName: 'outistructors';
+  info: {
+    singularName: 'outistructor';
+    pluralName: 'outistructors';
+    displayName: 'outistructor';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    name: Attribute.String;
+    jobTitle: Attribute.String;
+    imgSrc: Attribute.Media;
+    displaying: Attribute.Boolean &
+      Attribute.Required &
+      Attribute.DefaultTo<false>;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::outistructor.outistructor',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::outistructor.outistructor',
       'oneToOne',
       'admin::user'
     > &
@@ -1544,6 +1607,8 @@ declare module '@strapi/types' {
       'api::course.course': ApiCourseCourse;
       'api::herosection.herosection': ApiHerosectionHerosection;
       'api::lesson.lesson': ApiLessonLesson;
+      'api::logo.logo': ApiLogoLogo;
+      'api::outistructor.outistructor': ApiOutistructorOutistructor;
       'api::sectionsinhome.sectionsinhome': ApiSectionsinhomeSectionsinhome;
       'api::survey-answer.survey-answer': ApiSurveyAnswerSurveyAnswer;
       'api::task.task': ApiTaskTask;

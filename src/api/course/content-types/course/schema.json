@@ -87,6 +87,9 @@
       "relation": "oneToOne",
       "target": "api::survey-answer.survey-answer",
       "mappedBy": "course"
+    },
+    "courseyoutubelink": {
+      "type": "text"
     }
   }
 }

@@ -122,6 +122,21 @@
     },
     "website": {
       "type": "string"
+    },
+    "GraduationDates": {
+      "type": "date",
+      "required": true
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "Male",
+        "Female"
+      ],
+      "required": true
+    },
+    "fullusername": {
+      "type": "string"
     }
   }
 }
